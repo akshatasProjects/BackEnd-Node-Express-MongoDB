@@ -60,3 +60,30 @@ The backend (server side) is the part that we cant see. This includes stuff like
 - npx - Node Package Executor - It installs only your project folder.
 
 - Download the Node JS with LTS(Long Term Support) always
+- To check the version of node
+
+  - node -v
+  - npm -v
+  - npx -v
+
+- Package.json contians and manages all the contains all dependencies.
+- npm is the one who creates the package.json
+- npm init - init initializes the folder
+
+- "main": "index.js" --> is a start file
+- To run JS file in cmd node index.js
+
+## nodemon
+
+- Its a package it will help the JS file run eachtime wou refresh / save the file without entering a command to run.
+  - To install npm i -g nodemon
+- Its important to keep JS to run continuosly because when we create a server it has to be on continuosly.
+
+- It will be available at C:\Users\DELL\AppData\Roaming\npm
+
+- Below command has to run in cmd once you install nodemon which gives the permission to the nodemon to run in our system.
+
+  - Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+- You can install nodemon in folder also but it will be restricted to folder only not to the system so you have to install it for each project.
+  - nodemon filename -- command to run nodemon
