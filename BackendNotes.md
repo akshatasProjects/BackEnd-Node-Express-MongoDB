@@ -247,3 +247,9 @@ How Post Works
 - here .config() file makes it ready to use the .env file
 
 ## How to access it
+
+<!-- console.log(process.env.variable-Included-in-file); -->
+
+console.log(process.env.myToken);
+
+<!-- 2:10 -->
