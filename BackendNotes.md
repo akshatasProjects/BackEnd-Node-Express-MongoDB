@@ -252,4 +252,128 @@ How Post Works
 
 console.log(process.env.myToken);
 
-<!-- 2:10 -->
+## MongoDB DataBase
+
+- DataBase : Any kind of information like text, image, video is stored and managed in one place is called Database
+- SQL DB and NoSQL DB
+
+- SQL - Structured Query - Row and column and table
+- NoSQL - Document oriented database(MongoDB).
+
+### MongoDB features
+
+- MongoDB is a document database meaning the data is stored in a JSON file / Object.
+- It is designed for high data storage.
+- MongoDB is most commonly used with NodeJS.
+- MongoDB provides powerful aggregation (logic).
+
+### MongoDB Installation
+
+- search for "mongoDB community server" (https://www.mongodb.com/try/download/community)
+- If encounter any error with latest version install the previous version, msi package.
+- when install mongoDB it gives the package called compass which contains all the queries related to mongoDB
+- Atlas is a cloud service provided by the mongo DB , if you dont want to install it in system, it works like CDN.
+
+- Once done with installation , MongoDB opens compass click on start.
+- click on Add new connection
+- click on your DB name.
+- click on open mongoDB shell, where you can write queries.
+- Under same DB you can create sub DB.
+
+### MongoDB Database commands
+
+- show dbs || show database ------ gives list of all DB
+- use 'Database Name' ------to create DB
+
+- show collections --- "Collections are tables inside DB"
+- db.createCollection('collection Name New')
+- db.'Collection Name Old'.renameCollection('Collection Name New')
+- db.'Collection Name'.drop(); ---- To delete collection
+
+- db.dropDatabase() ---- To delete database
+
+- db.'Collection Name'.renameCollection("name") --- renames the existing collection
+
+- db.'Collection Name'.insertOne({}) --- inserts data to collection, the data should be in Object{} like in JSON, MongoDB returns ObjectId('67b83dd7202ab1dab96b42a8')
+
+<!-- Insert Data -->
+
+- db.'Collection Name'.insertMany([{}]); ----- inserts more than one data to collection.
+<!-- Find Data -->
+- db.'Collection Name'.find() ---- gives complete data available in the database, in an array format.
+- db.'Collection Name'.find({category:"News"}) ---- filters category wise and give the result
+- db.'Collection Name'.findOne({\_id:ObjectID}) -- gives only result at a time
+- db.'Collection Name'.find({},{title:1, date:1})
+<!-- Delete -->
+- db.'Collectio Name'.deleteOne(\_id:ObjectId('objectid')) ---- deletes one item at a time based on ObejctId.
+- db.'Collectio Name'.deleteMany(\_id:ObjectId('objectid')) ---- deletes one item at a time based on ObejctId.
+
+<!-- Update Data -->
+
+- db.'Collectio Name'.updateOne({},{$set:{}})
+- db.'Collectio Name'.updateMany({},{$set:{}})
+- db.'Collectio Name'.updateOne({\_id:ObjectId("obejctid")},{$set:{"key":"value"}}) ---- you have to pass id to update the data, whatever data need to be updated will be passed in the set
+
+<!-- Notes data -->
+
+- Object ID are the unique ID for each collection created in the database.
+
+## Connect Mongo DB with Node JS (Insert & View API)
+
+- Basic Things to server
+  let express = require("express");
+  let app = express();
+
+app.use(express.json());
+
+- Here app.use(express.json()) -- is the middleware we are using which will be applied to app, to handle the json data from the thunderClient or any other.
+
+- We need to install a npm package to connect mongoDB.
+
+<!-- Below code required for DB connection after installing it npm i mongodb -->
+<!-- Keep it in seperate file -->
+
+- Once you imported the file const { MongoClient } = require("mongodb");
+- we need to open the MongoDB interface
+- If you have an Atlas cluster, go to the Cluster view. Click the 'Connect' button for the cluster to which you wish to connect.
+- Else copy the URL mongodb://localhost:27017/ from the database (CLick on top + sign next to Connections)
+
+- Store the url link to the variable in server page - let dbConnectionURL = "mongodb://localhost:27017";
+
+- Sometimes the word in URL "localhost" doesnt work, so instead of "localhost" we can add IP: which is provided in the page "https://www.npmjs.com/package/mongodb" -- using a host of 127.0.0.1 in place of localhost
+
+- client helps in establishing the connection - let client = new MongoClient(dbConnectionURL);
+
+- Since it comes with promises we need to se Async also it may take time to connect.
+
+- client.db("DB name"); --- create the new db
+
+<!-- DB connection code -->
+
+const { MongoClient } = require('mongodb');
+// or as an es module:
+// import { MongoClient } from 'mongodb'
+
+// Connection URL
+const url = 'mongodb://localhost:27017';
+const client = new MongoClient(url);
+
+// Database Name
+const dbName = 'myProject';
+
+async function main() {
+// Use connect method to connect to the server
+await client.connect();
+console.log('Connected successfully to server');
+const db = client.db(dbName);
+const collection = db.collection('documents');
+
+// the following code examples can be pasted here...
+
+return 'done.';
+}
+
+main()
+.then(console.log)
+.catch(console.error)
+.finally(() => client.close());
