@@ -348,6 +348,13 @@ app.use(express.json());
 
 - client.db("DB name"); --- create the new db
 
+- let studCollection = myDBreturned.collection("studDataCollection"); --- creating collection / table
+
+- Here we are creating object, getting the data from req.body as in JSON the data will be stored in body
+  let objData = {
+  studName: req.body.studName,
+  };
+
 <!-- DB connection code -->
 
 const { MongoClient } = require('mongodb');

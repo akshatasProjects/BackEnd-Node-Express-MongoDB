@@ -11,3 +11,5 @@ let dbConnection = async () => {
   return db;
 };
 module.exports = { dbConnection };
+
+// Same way like how we created the DB we can also create a collections please refer MongoDB documentation.
